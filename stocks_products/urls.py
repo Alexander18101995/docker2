@@ -15,8 +15,20 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+import logistic.views as logistic
+
+
+
+router = DefaultRouter()
+
+router.register('product', logistic.ProductViewSet)
+router.register('stock', logistic.StockViewSet)
+
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/v1/', include('logistic.urls')),
+    path('api/', include(router.urls)),
 ]
